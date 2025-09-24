@@ -1,6 +1,7 @@
 # src/train_transformer.py
 import os
 import pandas as pd
+from pathlib import Path
 from sklearn.model_selection import train_test_split
 from datasets import Dataset
 from transformers import DistilBertTokenizerFast, DistilBertForSequenceClassification, TrainingArguments, Trainer
@@ -12,7 +13,9 @@ from preprocess import clean_text   # our text cleaner
 # ======================
 # 1. Load dataset
 # ======================
-CSV_PATH = "D:\\Users\\DELL\\Desktop\\reviews-task\\data\\reply_classification_dataset.csv"
+# Build an absolute path to the dataset so the script works no matter the current working directory.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+CSV_PATH = PROJECT_ROOT / "data" / "reply_classification_dataset.csv"
 df = pd.read_csv(CSV_PATH)
 
 # Drop missing values & clean
@@ -75,8 +78,10 @@ model = DistilBertForSequenceClassification.from_pretrained(
 # ======================
 # 6. Training setup
 # ======================
+MODEL_DIR = os.path.join("models", "distilbert")
+
 training_args = TrainingArguments(
-    output_dir="models/distilbert",
+    output_dir=MODEL_DIR,               # ✅ local folder
     evaluation_strategy="epoch",
     save_strategy="epoch",
     logging_dir="logs",

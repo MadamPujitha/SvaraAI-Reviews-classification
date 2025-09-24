@@ -1,6 +1,7 @@
 import os
 import joblib
 import pandas as pd
+from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -12,7 +13,8 @@ from preprocess import clean_text   # our preprocessing function
 # ======================
 # 1. Load dataset
 # ======================
-DATA_PATH = os.path.join("data", "reply_classification_dataset.csv")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DATA_PATH = PROJECT_ROOT / "data" / "reply_classification_dataset.csv"
 df = pd.read_csv(DATA_PATH)
 
 # Drop missing values and clean text
