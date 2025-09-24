@@ -1,4 +1,4 @@
-# Reply Classification (SvaraAI mini-project)
+# Reply Classification 
 
 ## Project Structure
 - `data/` – dataset (replies.csv)
