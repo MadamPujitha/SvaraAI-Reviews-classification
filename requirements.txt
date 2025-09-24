@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pandas
+numpy
+scikit-learn
+joblib
+transformers  # suitable recent transformers
+datasets
+torch                # pick the right version for your CUDA or cpu
+scipy
